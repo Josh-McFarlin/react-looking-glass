@@ -4,8 +4,9 @@ A React component for magnifying images using a magnifying/looking glass effect.
 
 React Looking Glass offers some advantages over other similar components:
 * Simple: Only set the source of the image and an amount to zoom by, everything else is optional
+* Support for all devices: Works with mouse and touch events
 * Uses React listeners: I made this component because alternatives would break my modals from creating native listeners after the component was rendered
-* Small: This component only relies on React and PropTypes
+* Small: This component only relies on two dependencies, React and PropTypes, so it is only 8kB
 * Simple style: Rather than passing in many different styles as props, they can easily be modified with className
 
 You can view detailed usage examples at the [Storybook](https://joshmcfarlin.me/react-looking-glass/), or a simple example on [CodeSandbox](https://codesandbox.io/s/jvv3qx79w3).

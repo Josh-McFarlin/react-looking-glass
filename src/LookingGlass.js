@@ -23,8 +23,7 @@ class LookingGlass extends React.Component {
                 pageX: 0,
                 pageY: 0
             },
-            hover: false,
-            opacity: 0
+            hover: false
         };
 
         this.imageRef = React.createRef();
@@ -32,9 +31,12 @@ class LookingGlass extends React.Component {
         this.onEnter = this.onEnter.bind(this);
         this.onLeave = this.onLeave.bind(this);
         this.onMove = this.onMove.bind(this);
+        this.setPosition = this.setPosition.bind(this);
     }
 
-    onEnter() {
+    onEnter(e) {
+        this.onMove(e);
+
         this.setState({
             hover: true
         });
@@ -47,17 +49,34 @@ class LookingGlass extends React.Component {
     }
 
     onMove(e) {
-        let cRect = this.imageRef.current.getBoundingClientRect();
+        if (e.hasOwnProperty("touches") || e.hasOwnProperty("changedTouches")) {
+            const t = (e.changedTouches || e.touches)[0];
+            const cRect = this.imageRef.current.getBoundingClientRect();
 
-        let mouseE = this.state.mouseE;
-        if (e.hasOwnProperty("clientX") && e.hasOwnProperty("pageX")) {
-            mouseE = {
+            if (t.clientX >= cRect.left && t.clientX <= cRect.right && t.clientY >= cRect.top && t.clientY <= cRect.bottom) {
+                this.setPosition({
+                    clientX: t.clientX,
+                    clientY: t.clientY,
+                    pageX: t.pageX,
+                    pageY: t.pageY
+                });
+            } else {
+                this.onLeave();
+            }
+        } else if (e.hasOwnProperty("clientX") && e.hasOwnProperty("pageX")) {
+            this.setPosition({
                 clientX: e.clientX,
                 clientY: e.clientY,
                 pageX: e.pageX,
                 pageY: e.pageY
-            };
+            });
+        } else {
+            this.setPosition(this.state.mouseE);
         }
+    }
+
+    setPosition(mouseE) {
+        const cRect = this.imageRef.current.getBoundingClientRect();
 
         this.setState({
             cursorPosition: {
@@ -96,6 +115,7 @@ class LookingGlass extends React.Component {
                     onTouchStart={this.onEnter}
                     onTouchEnd={this.onLeave}
                     onTouchCancel={this.onLeave}
+                    onTouchMove={this.onMove}
                     ref={this.imageRef}
                     style={{
                         width: "100%",
