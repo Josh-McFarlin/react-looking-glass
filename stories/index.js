@@ -3,7 +3,7 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { withKnobs, boolean, number, object, select } from '@storybook/addon-knobs';
 
-import LookingGlass from "../LookingGlass";
+import LookingGlass from "../src/LookingGlass";
 import waves from "./static/kevin-lanceplaine-243768-unsplash.jpg";
 import lake from "./static/riccardo-chiarini-365677-unsplash.jpg";
 import ocean from "./static/shifaaz-shamoon-1113388-unsplash.jpg";

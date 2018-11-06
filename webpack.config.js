@@ -1,7 +1,7 @@
 const path = require('path');
 
 module.exports = {
-    entry: './src/index.js',
+    entry: './src/LookingGlass.js',
     output: {
         path: path.resolve(__dirname, 'build'),
         filename: 'index.js',
@@ -16,7 +16,7 @@ module.exports = {
                 use: {
                     loader: 'babel-loader',
                     options: {
-                        presets: ['env']
+                        presets: ['@babel/preset-env']
                     }
                 }
             }
