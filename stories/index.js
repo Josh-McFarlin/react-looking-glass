@@ -31,28 +31,28 @@ const StoryBase = props =>
 
 stories.add('Basic Example', () => (
     <StoryBase>
-        <LookingGlass zoomFactor={4} url={lake} />
+        <LookingGlass src={lake} zoomFactor={4} />
     </StoryBase>
 ));
 
 
 stories.add('Offset Cursor Example', () => (
     <StoryBase>
-        <LookingGlass zoomFactor={4} url={lake} cursorOffset={{ x: -75, y: -75 }} />
+        <LookingGlass src={lake} zoomFactor={4} cursorOffset={{ x: -75, y: -75 }} />
     </StoryBase>
 ));
 
 
 stories.add('Scrolling Example', () => (
     <StoryBase>
-        <LookingGlass zoomFactor={4} url={ocean} />
+        <LookingGlass src={ocean} zoomFactor={4} />
     </StoryBase>
 ));
 
-stories.add('Zoom Url Example', () => (
+stories.add('zoomSrc Example', () => (
     <StoryBase>
-        <LookingGlass zoomFactor={4} url={patternSmall} zoomUrl={pattern} />
-        <p>zoomUrl is a url to an image with 8x the resolution of the base image</p>
+        <LookingGlass src={patternSmall} zoomFactor={4} zoomSrc={pattern} />
+        <p>zoomSrc is an image with 8x the resolution of the base image</p>
     </StoryBase>
 ));
 
@@ -71,7 +71,7 @@ class ChangeZoomExample extends React.Component {
 
         return (
             <React.Fragment>
-                <LookingGlass zoomFactor={zoom} url={waves} />
+                <LookingGlass src={waves} zoomFactor={zoom} />
                 <button onClick={() => this.setState(prevState => ({ zoom: prevState.zoom - 0.5 }))}>Decrease Zoom</button>
                 <p>Current Zoom: {zoom}</p>
                 <button onClick={() => this.setState(prevState => ({ zoom: prevState.zoom + 0.5 }))}>Increase Zoom</button>
@@ -97,7 +97,7 @@ stories.add('With Dynamic Props', () => {
         y: 0
     });
 
-    const image = select('url', {
+    const image = select('Image', {
         Waves: waves,
         Lake: lake,
         Ocean: ocean
@@ -107,7 +107,7 @@ stories.add('With Dynamic Props', () => {
 
     return (
         <StoryBase>
-            <LookingGlass size={size} zoomFactor={zoom} url={image} cursorOffset={offset} scrollLinked={linked} />
+            <LookingGlass src={image} zoomFactor={zoom} size={size} cursorOffset={offset} scrollLinked={linked} />
             <p>(View the Knobs Tab)</p>
         </StoryBase>
     );

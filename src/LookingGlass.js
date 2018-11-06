@@ -29,18 +29,18 @@ class LookingGlass extends React.Component {
 
         this.imageRef = React.createRef();
 
-        this.onMouseEnter = this.onMouseEnter.bind(this);
-        this.onMouseLeave = this.onMouseLeave.bind(this);
+        this.onEnter = this.onEnter.bind(this);
+        this.onLeave = this.onLeave.bind(this);
         this.onMove = this.onMove.bind(this);
     }
 
-    onMouseEnter() {
+    onEnter() {
         this.setState({
             hover: true
         });
     }
 
-    onMouseLeave() {
+    onLeave() {
         this.setState({
             hover: false
         });
@@ -73,7 +73,7 @@ class LookingGlass extends React.Component {
     }
 
     render() {
-        let { url, displayZoomOne, zoomFactor, scrollLinked, ...restProps } = this.props;
+        let { src, alt, zoomFactor, displayZoomOne, scrollLinked, className, imageClassName, ...restProps } = this.props;
         let { hover, ...restState } = this.state;
 
         return (
@@ -82,19 +82,27 @@ class LookingGlass extends React.Component {
                 style={{
                     width: "100%",
                     height: "100%",
-                    overflowY: "auto"
+                    overflowY: "auto",
+                    touchAction: 'none'
                 }}
+                className={className}
             >
                 <img
-                    src={url}
-                    onMouseEnter={this.onMouseEnter}
-                    onMouseLeave={this.onMouseLeave}
+                    src={src}
+                    alt={alt}
+                    onMouseEnter={this.onEnter}
+                    onMouseLeave={this.onLeave}
                     onMouseMove={this.onMove}
+                    onTouchStart={this.onEnter}
+                    onTouchEnd={this.onLeave}
+                    onTouchCancel={this.onLeave}
                     ref={this.imageRef}
                     style={{
                         width: "100%",
-                        height: "auto"
+                        height: "auto",
+                        touchAction: 'none'
                     }}
+                    className={imageClassName}
                 />
 
                 {
@@ -112,37 +120,54 @@ class LookingGlass extends React.Component {
 }
 
 LookingGlass.defaultProps = {
+    zoomFactor: 3,
     size: 200,
     cursorOffset: { x: 0, y: 0 },
     alt: "",
     displayZoomOne: false,
-    scrollLinked: true
+    scrollLinked: true,
+    squareMagnifier: false
 };
 
 LookingGlass.propTypes = {
+    // large image url
+    src: PropTypes.string.isRequired,
+
+    // the alternate text for when image cannot be displayed
+    alt: PropTypes.string.isRequired,
+
+    // the factor to zoom by
+    zoomFactor: PropTypes.number.isRequired,
+
     // the size of the magnifier window
     size: PropTypes.number,
 
-    // the offset of the zoom bubble from the cursor
+    // the offset of the magnifier from the cursor
     cursorOffset: PropTypes.shape({
         x: PropTypes.number.isRequired,
         y: PropTypes.number.isRequired
     }),
 
-    // the factor to zoom by
-    zoomFactor: PropTypes.number.isRequired,
-
-    // large image url
-    url: PropTypes.string.isRequired,
-
     // an optional higher resolution photo for the magnifier
-    zoomUrl: PropTypes.string,
+    zoomSrc: PropTypes.string,
 
-    // will hide the magnifier when equal to zoom if equal to 1 if enabled
+    // will show the magnifier when zoomFactor is equal to 1
     displayZoomOne: PropTypes.bool,
 
     // will update the magnifier when the container scrolls, but this might break on some browsers
-    scrollLinked: PropTypes.bool
+    scrollLinked: PropTypes.bool,
+
+    // if true will display the magnifier as a square
+    squareMagnifier: PropTypes.bool,
+
+    // the name of the class for the image holder
+    className: PropTypes.string,
+
+    // the name of the class for the image itself
+    imageClassName: PropTypes.string,
+
+    // the name of the class for the magnifying glass
+    zoomClassName: PropTypes.string
 };
 
 export default LookingGlass;

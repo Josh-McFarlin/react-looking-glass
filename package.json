@@ -1,6 +1,6 @@
 {
   "name": "react-looking-glass",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "A react component for magnifying images with a magnifying/looking glass effect",
   "main": "build/index.js",
   "scripts": {
