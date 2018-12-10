@@ -14,7 +14,7 @@ You can view detailed usage examples at the [Storybook](https://joshmcfarlin.me/
 ## Usage
 Install the package using NPM:
 ```
-npm install react-magnifier
+npm install react-looking-glass
 ```
 
 Use the component:
