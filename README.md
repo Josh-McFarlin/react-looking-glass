@@ -39,3 +39,4 @@ import image from "./path";
 | className      | String  |                |          | The name of the class for the image holder (the root of the component)                      |
 | imageClassName | String  |                |          | The name of the class for the image itself (only applies to the primary image)              |
 | zoomClassName  | String  |                |          | The name of the class for the magnifying glass                                              |
+| hideCursor     | Boolean |                |          | The name of the class for the magnifying glass                                              |

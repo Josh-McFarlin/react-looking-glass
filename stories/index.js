@@ -3,12 +3,12 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { withKnobs, boolean, number, object, select } from '@storybook/addon-knobs';
 
-import LookingGlass from "../src/LookingGlass";
-import waves from "./static/kevin-lanceplaine-243768-unsplash.jpg";
-import lake from "./static/riccardo-chiarini-365677-unsplash.jpg";
-import ocean from "./static/shifaaz-shamoon-1113388-unsplash.jpg";
-import pattern from "./static/vanessa-ives-559179-unsplash.jpg";
-import patternSmall from "./static/vanessa-ives-559179-unsplash_small.jpg";
+import LookingGlass from '../src/LookingGlass';
+import waves from './static/kevin-lanceplaine-243768-unsplash.jpg';
+import lake from './static/riccardo-chiarini-365677-unsplash.jpg';
+import ocean from './static/shifaaz-shamoon-1113388-unsplash.jpg';
+import pattern from './static/vanessa-ives-559179-unsplash.jpg';
+import patternSmall from './static/vanessa-ives-559179-unsplash_small.jpg';
 
 
 const stories = storiesOf('LookingGlass', module);
@@ -19,11 +19,11 @@ const StoryBase = props =>
         style={{
             width: 600,
             height: 600,
-            maxWidth: "90%",
-            maxHeight: "90%",
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center"
+            maxWidth: '90%',
+            maxHeight: '90%',
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center'
         }}
     >
         { props.children }
@@ -31,14 +31,14 @@ const StoryBase = props =>
 
 stories.add('Basic Example', () => (
     <StoryBase>
-        <LookingGlass src={lake} zoomFactor={4} />
+        <LookingGlass src={lake} zoomFactor={4} hideCursor={false} />
     </StoryBase>
 ));
 
 
 stories.add('Offset Cursor Example', () => (
     <StoryBase>
-        <LookingGlass src={lake} zoomFactor={4} cursorOffset={{ x: -75, y: -75 }} />
+        <LookingGlass src={lake} zoomFactor={4} cursorOffset={{ x: -75, y: -75 }} hideCursor={false} />
     </StoryBase>
 ));
 
@@ -105,9 +105,11 @@ stories.add('With Dynamic Props', () => {
 
     const linked = boolean('scrollLinked', true);
 
+    const hideCursor = boolean('hideCursor', true);
+
     return (
         <StoryBase>
-            <LookingGlass src={image} zoomFactor={zoom} size={size} cursorOffset={offset} scrollLinked={linked} />
+            <LookingGlass src={image} zoomFactor={zoom} size={size} cursorOffset={offset} scrollLinked={linked} hideCursor={hideCursor} />
             <p>(View the Knobs Tab)</p>
         </StoryBase>
     );

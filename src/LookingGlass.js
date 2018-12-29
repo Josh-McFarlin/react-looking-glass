@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import Magnifier from "./Magnifier";
 
 
-class LookingGlass extends React.Component {
+class LookingGlass extends React.PureComponent {
     constructor(props) {
         super(props);
 
@@ -92,7 +92,7 @@ class LookingGlass extends React.Component {
     }
 
     render() {
-        let { src, alt, zoomFactor, displayZoomOne, scrollLinked, className, imageClassName, ...restProps } = this.props;
+        let { src, alt, zoomFactor, displayZoomOne, scrollLinked, className, imageClassName, hideCursor, ...restProps } = this.props;
         let { hover, ...restState } = this.state;
 
         return (
@@ -120,7 +120,8 @@ class LookingGlass extends React.Component {
                     style={{
                         width: "100%",
                         height: "auto",
-                        touchAction: 'none'
+                        touchAction: 'none',
+                        cursor: hideCursor === true ? "none": "crosshair"
                     }}
                     className={imageClassName}
                 />
@@ -138,16 +139,6 @@ class LookingGlass extends React.Component {
         );
     }
 }
-
-LookingGlass.defaultProps = {
-    zoomFactor: 3,
-    size: 200,
-    cursorOffset: { x: 0, y: 0 },
-    alt: "",
-    displayZoomOne: false,
-    scrollLinked: true,
-    squareMagnifier: false
-};
 
 LookingGlass.propTypes = {
     // large image url
@@ -187,7 +178,21 @@ LookingGlass.propTypes = {
     imageClassName: PropTypes.string,
 
     // the name of the class for the magnifying glass
-    zoomClassName: PropTypes.string
+    zoomClassName: PropTypes.string,
+
+    // will hide the cursor when being hovered over
+    hideCursor: PropTypes.bool
+};
+
+LookingGlass.defaultProps = {
+    zoomFactor: 3,
+    size: 200,
+    cursorOffset: { x: 0, y: 0 },
+    alt: "",
+    displayZoomOne: false,
+    scrollLinked: true,
+    squareMagnifier: false,
+    hideCursor: true
 };
 
 export default LookingGlass;

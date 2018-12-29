@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 
-class Magnifier extends React.Component {
+class Magnifier extends React.PureComponent {
     render() {
         let { imageRef, zoomFactor, size, cursorOffset, zoomSrc, cursorPosition, imageOffset, squareMagnifier, zoomClassName } = this.props;
 
@@ -26,10 +26,10 @@ class Magnifier extends React.Component {
                     marginLeft: cursorOffset.x - halfSize,
                     marginTop: cursorOffset.y - halfSize,
                     backgroundColor: 'white',
-                    borderRadius: !squareMagnifier ? "50%" : undefined,
+                    borderRadius: !squareMagnifier ? "50%" : "0%",
                     boxShadow: `1px 1px 6px rgba(0,0,0,0.3)`,
                     touchAction: 'none',
-                    pointerEvents: 'none'
+                    pointerEvents: 'none',
                 }}
                 className={zoomClassName}
             >
@@ -41,7 +41,7 @@ class Magnifier extends React.Component {
                         backgroundSize: `${imageWidth * zoomFactor}px ${imageHeight * zoomFactor}px`,
                         backgroundRepeat: 'no-repeat',
                         backgroundPosition: `${bgX}px ${bgY}px`,
-                        borderRadius: !squareMagnifier ? "50%" : undefined,
+                        borderRadius: !squareMagnifier ? "50%" : "0%",
                         touchAction: 'none',
                         pointerEvents: 'none'
                     }}
